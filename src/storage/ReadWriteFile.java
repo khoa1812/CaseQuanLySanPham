@@ -1,10 +1,13 @@
 package storage;
 
+import format.CookieSize;
+import format.Sales;
 import product.Cookie;
 import product.Food;
 import product.Meat;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,11 +38,13 @@ public class ReadWriteFile implements IReadWriteFile {
 
     private List<Food> getDefaultFoods() {
         List<Food> defaultFoods = new ArrayList<>();
-//        defaultProducts.add(new Product("01", "Duy", 1000, "Hãng Samsung", "Chạy chậm, đơ lác"));
-//        defaultProducts.add(new Product("02", "Hieu", 2000, "Hãng Apple", "Gầy ốm"));
-//        defaultProducts.add(new Product("03", "Quan", 3000, "Hãng Dell", "Nhanh mượt"));
-        defaultFoods.add(new Meat());
-        defaultFoods.add(new Cookie());
+
+        defaultFoods.add(new Meat("01", "bò", 200, 10, LocalDate.now(),10, Sales.SALE10));
+        defaultFoods.add(new Meat("02", "lợn", 160, 10, LocalDate.now(),10, Sales.SALE15));
+        defaultFoods.add(new Meat("03", "gà", 150, 10, LocalDate.now(),10, Sales.SALE20));
+        defaultFoods.add(new Cookie("04", "bánh mỳ", 30, 15, LocalDate.now(), Sales.SALE10, CookieSize.SMALLSIZE));
+        defaultFoods.add(new Cookie("05", "gato", 50, 20, LocalDate.now(), Sales.SALE10, CookieSize.BIGSIZE));
+        defaultFoods.add(new Cookie("06", "su kem", 25, 15, LocalDate.now(), Sales.SALE10, CookieSize.SMALLSIZE));
 
         writeFile(defaultFoods);
         return defaultFoods;

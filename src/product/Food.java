@@ -1,19 +1,22 @@
 package product;
 
+import format.Sales;
+import format.Regex;
+
 import java.time.LocalDate;
 
-public class Food {
+public class Food implements Regex {
     private String id;
     private String name;
     private double price;
     private int quantity;
     private LocalDate date;
-    private double sale;
+    private Sales sale;
 
     public Food() {
     }
 
-    public Food(String id, String name, double price, int quantity, LocalDate date, double sale) {
+    public Food(String id, String name, double price, int quantity, LocalDate date, Sales sale) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -62,12 +65,28 @@ public class Food {
         this.date = date;
     }
 
-    public double getSale() {
+    public Sales getSale() {
         return sale;
     }
 
-    public void setSale(double sale) {
+    public void setSale(Sales sale) {
         this.sale = sale;
+    }
+
+    public void setQuantityFromString(String quantityStr) {
+        if (QUANTITY_PATTERN.matcher(quantityStr).matches()) {
+            this.quantity = Integer.parseInt(quantityStr);
+        } else {
+            throw new IllegalArgumentException("QSố lượng từ 1 đến 20.");
+        }
+    }
+
+    public void setDateFromString(String dateString) {
+        if (DATE_PATTERN.matcher(dateString).matches()) {
+            this.date = LocalDate.parse(dateString);
+        } else {
+            throw new IllegalArgumentException("Định dạng bắt buộc: YYYY-MM-DD.");
+        }
     }
 
     @Override

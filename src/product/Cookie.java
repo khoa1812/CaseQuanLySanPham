@@ -1,29 +1,34 @@
 package product;
 
+import format.CookieSize;
+import format.Sales;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Cookie extends Food implements Discount, Serializable {
-    private final double bigSize = 2;
-    private final double smallSize = 1.5;
-    private double size;
+    private CookieSize size;
     public Cookie() {
     }
 
-    public Cookie(String id, String name, double price, int quantity, LocalDate date, double sale, double size) {
+    public Cookie(String id, String name, double price, int quantity, LocalDate date, Sales sale, CookieSize size) {
         super(id, name, price, quantity, date, sale);
+        this.size = size;
+    }
+
+    public CookieSize getSize() {
+        return size;
+    }
+
+    public void setSize(CookieSize size) {
         this.size = size;
     }
 
     @Override
     public double getRealMoney() {
-        if(size == bigSize){
-            return getPrice()*bigSize*getSale()*getQuantity();
-        }
-        else if (size == smallSize){
-            return getPrice()*smallSize*getSale()*getQuantity();
-        }
-        else {
+        if (size != null) {
+            return getPrice() * size.getValue() * getSale().getPercent() * getQuantity();
+        } else {
             return 0;
         }
     }

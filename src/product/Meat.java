@@ -1,5 +1,7 @@
 package product;
 
+import format.Sales;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -9,7 +11,7 @@ public class Meat extends Food implements Discount, Serializable {
     public Meat() {
     }
 
-    public Meat(String id, String name, double price, int quantity, LocalDate date, double weight, double sale) {
+    public Meat(String id, String name, double price, int quantity, LocalDate date, double weight, Sales sale) {
         super(id, name, price, quantity, date, sale);
         this.weight = weight;
     }
@@ -24,6 +26,6 @@ public class Meat extends Food implements Discount, Serializable {
 
     @Override
     public double getRealMoney() {
-        return getPrice()*weight*getQuantity()*getSale();
+        return getPrice()*weight*getQuantity()*getSale().getPercent();
     }
 }
