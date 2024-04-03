@@ -1,12 +1,11 @@
 package product;
 
 import format.Sales;
-import format.Regex;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Food implements Regex, Serializable {
+public class Food implements Serializable {
     private String id;
     private String name;
     private double price;
@@ -72,22 +71,6 @@ public class Food implements Regex, Serializable {
 
     public void setSale(Sales sale) {
         this.sale = sale;
-    }
-
-    public void setQuantityFromString(String quantityStr) {
-        if (QUANTITY_PATTERN.matcher(quantityStr).matches()) {
-            this.quantity = Integer.parseInt(quantityStr);
-        } else {
-            throw new IllegalArgumentException("Số lượng từ 1 đến 20.");
-        }
-    }
-
-    public void setDateFromString(String dateString) {
-        if (DATE_PATTERN.matcher(dateString).matches()) {
-            this.date = LocalDate.parse(dateString);
-        } else {
-            throw new IllegalArgumentException("Định dạng bắt buộc: YYYY-MM-DD.");
-        }
     }
 
     @Override

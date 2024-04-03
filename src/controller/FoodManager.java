@@ -1,6 +1,7 @@
 package controller;
 
 import format.CookieSize;
+import format.Regex;
 import format.Sales;
 import product.Cookie;
 import product.Food;
@@ -13,7 +14,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-public class FoodManager {
+
+public class FoodManager implements Regex {
     private static IReadWriteFile readWriteFile = new ReadWriteFile();
     private static List<Food> foods = readWriteFile.readFile();
 
@@ -34,6 +36,87 @@ public class FoodManager {
         }
     }
 
+
+//    public static void editFood(String foodId, Food updatedFood, Scanner scanner) {
+//        int foodIndex = -1;
+//        for (int i = 0; i < foods.size(); i++) {
+//            if (foods.get(i).getId().equals(foodId)) {
+//                foodIndex = i;
+//                break;
+//            }
+//        }
+//        if (foodIndex != -1) {
+//            System.out.print("Chọn loại sản phẩm để thêm (1 - Meat, 2 - Cookie): ");
+//            int type = scanner.nextInt();
+//            scanner.nextLine();
+//            switch (type) {
+//                case 1:
+//                    addNewMeat(scanner);
+//                    break;
+//                case 2:
+//                    addNewCookie(scanner);
+//                    break;
+//                default:
+//                    System.out.println("Lựa chọn không hợp lệ!");
+//                    break;
+//            }
+//        } else {
+//            System.out.println("Không tìm thấy sản phẩm với mã: " + foodId);
+//        }
+//    }
+
+    public static void editFood(String foodId, Scanner scanner) {
+        Food foodToEdit = foods.stream().filter(food -> food.getId().equals(foodId)).findFirst().orElse(null);
+
+        if (foodToEdit == null) {
+            System.out.println("Không tìm thấy sản phẩm với mã: " + foodId);
+            return;
+        }
+
+        System.out.print("Nhập tên mới: ");
+        String name = scanner.nextLine();
+        foodToEdit.setName(name);
+
+        System.out.print("Nhập giá mới: ");
+        double price = scanner.nextDouble();
+        foodToEdit.setPrice(price);
+
+        System.out.print("Nhập số lượng mới: ");
+        String quantityStr = scanner.next();
+        while (!QUANTITY_PATTERN.matcher(quantityStr).matches()) {
+            System.out.println("Số lượng từ 1 đến 20.");
+            System.out.print("Nhập số lượng mới: ");
+            quantityStr = scanner.next();
+        }
+        int quantity = Integer.parseInt(quantityStr);
+        foodToEdit.setQuantity(quantity);
+        scanner.nextLine();
+
+        System.out.print("Chọn mức giảm giá (1 - SALE10, 2 - SALE15, 3 - SALE20): ");
+        int saleOption = scanner.nextInt();
+        scanner.nextLine();
+
+        Sales sale = Sales.SALE10;
+        switch (saleOption) {
+            case 1:
+                sale = Sales.SALE10;
+                break;
+            case 2:
+                sale = Sales.SALE15;
+                break;
+            case 3:
+                sale = Sales.SALE20;
+                break;
+            default:
+                System.out.println("Lựa chọn không hợp lệ. Sử dụng mức giảm giá mặc định SALE10.");
+                break;
+        }
+        foodToEdit.setSale(sale);
+
+        readWriteFile.writeFile(foods);
+        System.out.println("Sản phẩm đã được cập nhật thành công.");
+    }
+
     private static void addNewMeat(Scanner scanner) {
         System.out.print("Nhập id: ");
         String id = scanner.nextLine();
@@ -42,7 +125,13 @@ public class FoodManager {
         System.out.print("Nhập giá: ");
         double price = scanner.nextDouble();
         System.out.print("Nhập số lượng: ");
-        int quantity = scanner.nextInt();
+        String quantityStr = scanner.nextLine();
+        while (!QUANTITY_PATTERN.matcher(quantityStr).matches()) {
+            System.out.println("Số lượng từ 1 đến 20.");
+            System.out.print("Nhập số lượng: ");
+            quantityStr = scanner.nextLine();
+        }
+        int quantity = Integer.parseInt(quantityStr);
         System.out.print("Nhập trọng lượng: ");
         double weight = scanner.nextDouble();
         System.out.print("Chọn mức giảm giá (1 - SALE10, 2 - SALE15, 3 - SALE20): ");
@@ -80,7 +169,13 @@ public class FoodManager {
         System.out.print("Nhập giá: ");
         double price = scanner.nextDouble();
         System.out.print("Nhập số lượng: ");
-        int quantity = scanner.nextInt();
+        String quantityStr = scanner.nextLine();
+        while (!QUANTITY_PATTERN.matcher(quantityStr).matches()) {
+            System.out.println("Số lượng từ 1 đến 20.");
+            System.out.print("Nhập số lượng: ");
+            quantityStr = scanner.nextLine();
+        }
+        int quantity = Integer.parseInt(quantityStr);
         System.out.print("Chọn kích cỡ (1 - BIGSIZE, 2 - SMALLSIZE): ");
         int sizeOption = scanner.nextInt();
         System.out.print("Chọn mức giảm giá (1 - SALE10, 2 - SALE15, 3 - SALE20): ");
@@ -144,24 +239,6 @@ public class FoodManager {
             foods.remove(foodToRemove);
             readWriteFile.writeFile(foods);
             System.out.println("Sản phẩm đã được xóa.");
-        } else {
-            System.out.println("Không tìm thấy sản phẩm với mã: " + foodId);
-        }
-    }
-
-    public static void editFood(String foodId, Food updatedFood) {
-        int foodIndex = -1;
-        for (int i = 0; i < foods.size(); i++) {
-            if (foods.get(i).getId().equals(foodId)) {
-                foodIndex = i;
-                break;
-            }
-        }
-        if (foodIndex != -1) {
-
-            foods.set(foodIndex, updatedFood);
-            readWriteFile.writeFile(foods);
-            System.out.println("Sản phẩm đã được cập nhật thành công.");
         } else {
             System.out.println("Không tìm thấy sản phẩm với mã: " + foodId);
         }

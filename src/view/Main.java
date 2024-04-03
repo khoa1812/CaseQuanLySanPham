@@ -47,12 +47,11 @@ public class Main {
                     String foodId1 = scanner.nextLine();
                     FoodManager.removeFood(foodId1);
                     break;
-//                case 5:
-//                    System.out.print("Nhập mã sản phẩm cần sửa: ");
-//                    String foodIdToEdit = scanner.nextLine();
-//                    Food updatedFood = createNew(scanner);
-//                    FoodManager.editFood(foodIdToEdit, updatedFood);
-//                    break;
+                case 5:
+                    System.out.print("Nhập mã sản phẩm cần sửa: ");
+                    String foodIdToEdit = scanner.nextLine();
+                    FoodManager.editFood(foodIdToEdit, scanner);
+                    break;
                 case 6:
                     FoodManager.sortFoodsByPrice();
                     break;
