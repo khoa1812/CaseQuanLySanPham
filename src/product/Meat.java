@@ -41,4 +41,5 @@ public class Meat extends Food implements Discount, Serializable {
                 "weight=" + weight +
                 '}';
     }
+
 }
