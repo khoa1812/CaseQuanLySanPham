@@ -32,6 +32,17 @@ public class Cookie extends Food implements Discount, Serializable {
             return 0;
         }
     }
-
+    @Override
+    public String toString() {
+        return "Cookie{" +
+                "id='" + getId() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", price=" + getPrice() +
+                ", quantity=" + getQuantity() +
+                ", date=" + getDate() +
+                ", sale=" + getSale() +
+                "size=" + size +
+                '}';
+    }
 
 }

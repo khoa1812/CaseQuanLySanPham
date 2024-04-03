@@ -19,19 +19,20 @@ public class Main {
             System.out.println("\nMenu:");
             System.out.println("1. Thêm sản phẩm mới");
             System.out.println("2. Hiển thị tất cả sản phẩm");
-            System.out.println("3. Tìm kiếm sản phẩm theo mã");
-            System.out.println("4. Xóa sản phẩm theo mã");
+            System.out.println("3. Tìm kiếm sản phẩm theo tên");
+            System.out.println("4. Xóa sản phẩm");
             System.out.println("5. Sửa thông tin sản phẩm");
+            System.out.println("6. Sắp xếp sản phẩm theo giá từ thấp đến cao");
+            System.out.println("7. Sắp xếp sản phẩm theo ngày nhập");
             System.out.println("0. Thoát");
             System.out.print("Nhập lựa chọn của bạn: ");
             choice = scanner.nextInt();
             scanner.nextLine();
 
             switch (choice) {
-//                case 1:
-//                    Food newFood = createNew(scanner);
-//                    FoodManager.addNewFood(newFood);
-//                    break;
+                case 1:
+                    FoodManager.addNewFood(scanner);
+                    break;
                 case 2:
                     System.out.println("\nDanh sách sản phẩm:");
                     FoodManager.displayFoods();
@@ -52,6 +53,13 @@ public class Main {
 //                    Food updatedFood = createNew(scanner);
 //                    FoodManager.editFood(foodIdToEdit, updatedFood);
 //                    break;
+                case 6:
+                    FoodManager.sortFoodsByPrice();
+                    break;
+                case 7:
+                    FoodManager.sortFoodsByExpirationDate();
+                    break;
+
                 case 0:
                     System.out.println("Thoát chương trình.");
                     break;
@@ -62,7 +70,9 @@ public class Main {
         } while (choice != 0);
 
         scanner.close();
+
+
     }
 
-
 }
+

@@ -3,9 +3,10 @@ package product;
 import format.Sales;
 import format.Regex;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Food implements Regex {
+public class Food implements Regex, Serializable {
     private String id;
     private String name;
     private double price;
@@ -77,7 +78,7 @@ public class Food implements Regex {
         if (QUANTITY_PATTERN.matcher(quantityStr).matches()) {
             this.quantity = Integer.parseInt(quantityStr);
         } else {
-            throw new IllegalArgumentException("QSố lượng từ 1 đến 20.");
+            throw new IllegalArgumentException("Số lượng từ 1 đến 20.");
         }
     }
 

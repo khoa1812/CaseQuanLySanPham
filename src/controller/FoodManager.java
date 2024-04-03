@@ -1,20 +1,116 @@
 package controller;
 
+import format.CookieSize;
+import format.Sales;
+import product.Cookie;
 import product.Food;
+import product.Meat;
 import storage.IReadWriteFile;
 import storage.ReadWriteFile;
 
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 
 public class FoodManager {
     private static IReadWriteFile readWriteFile = new ReadWriteFile();
     private static List<Food> foods = readWriteFile.readFile();
 
-    public static void addNewFood(Food food) {
-        foods.add(food);
-        readWriteFile.writeFile(foods);
-        System.out.println("Sản phẩm đã được thêm thành công.");
+    public static void addNewFood(Scanner scanner) {
+        System.out.print("Chọn loại sản phẩm để thêm (1 - Meat, 2 - Cookie): ");
+        int type = scanner.nextInt();
+        scanner.nextLine();
+        switch (type) {
+            case 1:
+                addNewMeat(scanner);
+                break;
+            case 2:
+                addNewCookie(scanner);
+                break;
+            default:
+                System.out.println("Lựa chọn không hợp lệ!");
+                break;
+        }
     }
+
+    private static void addNewMeat(Scanner scanner) {
+        System.out.print("Nhập id: ");
+        String id = scanner.nextLine();
+        System.out.print("Nhập tên: ");
+        String name = scanner.nextLine();
+        System.out.print("Nhập giá: ");
+        double price = scanner.nextDouble();
+        System.out.print("Nhập số lượng: ");
+        int quantity = scanner.nextInt();
+        System.out.print("Nhập trọng lượng: ");
+        double weight = scanner.nextDouble();
+        System.out.print("Chọn mức giảm giá (1 - SALE10, 2 - SALE15, 3 - SALE20): ");
+        int saleOption = scanner.nextInt();
+        scanner.nextLine();
+
+        Sales sale = Sales.SALE10;
+        switch (saleOption) {
+            case 1:
+                sale = Sales.SALE10;
+                break;
+            case 2:
+                sale = Sales.SALE15;
+                break;
+            case 3:
+                sale = Sales.SALE20;
+                break;
+            default:
+                System.out.println("Lựa chọn không hợp lệ. Sử dụng mức giảm giá mặc định SALE10.");
+                break;
+        }
+
+        Meat meat = new Meat(id, name, price, quantity, LocalDate.now(), weight, sale);
+        foods.add(meat);
+        readWriteFile.writeFile(foods);
+        System.out.println("Sản phẩm thịt đã được thêm thành công.");
+    }
+
+
+    private static void addNewCookie(Scanner scanner) {
+        System.out.print("Nhập id: ");
+        String id = scanner.nextLine();
+        System.out.print("Nhập tên: ");
+        String name = scanner.nextLine();
+        System.out.print("Nhập giá: ");
+        double price = scanner.nextDouble();
+        System.out.print("Nhập số lượng: ");
+        int quantity = scanner.nextInt();
+        System.out.print("Chọn kích cỡ (1 - BIGSIZE, 2 - SMALLSIZE): ");
+        int sizeOption = scanner.nextInt();
+        System.out.print("Chọn mức giảm giá (1 - SALE10, 2 - SALE15, 3 - SALE20): ");
+        int saleOption = scanner.nextInt();
+        scanner.nextLine();
+
+        CookieSize size = (sizeOption == 1) ? CookieSize.BIGSIZE : CookieSize.SMALLSIZE;
+
+        Sales sale = Sales.SALE10;
+        switch (saleOption) {
+            case 1:
+                sale = Sales.SALE10;
+                break;
+            case 2:
+                sale = Sales.SALE15;
+                break;
+            case 3:
+                sale = Sales.SALE20;
+                break;
+            default:
+                System.out.println("Lựa chọn không hợp lệ. Sử dụng mức giảm giá mặc định SALE10.");
+                break;
+        }
+
+        Cookie cookie = new Cookie(id, name, price, quantity, LocalDate.now(), sale, size);
+        foods.add(cookie);
+        readWriteFile.writeFile(foods);
+        System.out.println("Sản phẩm cookie đã được thêm thành công.");
+    }
+
 
     public static void displayFoods() {
         if (foods.isEmpty()) {
@@ -70,4 +166,17 @@ public class FoodManager {
             System.out.println("Không tìm thấy sản phẩm với mã: " + foodId);
         }
     }
+
+    public static void sortFoodsByPrice() {
+        foods.sort(Comparator.comparingDouble(Food::getPrice));
+        displayFoods();
+    }
+
+    public static void sortFoodsByExpirationDate() {
+        foods.sort(Comparator.comparing(Food::getDate));
+        displayFoods();
+    }
+
+
+
 }

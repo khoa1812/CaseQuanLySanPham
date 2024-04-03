@@ -28,4 +28,17 @@ public class Meat extends Food implements Discount, Serializable {
     public double getRealMoney() {
         return getPrice()*weight*getQuantity()*getSale().getPercent();
     }
+
+    @Override
+    public String toString() {
+        return "Meat{" +
+                "id='" + getId() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", price=" + getPrice() +
+                ", quantity=" + getQuantity() +
+                ", date=" + getDate() +
+                ", sale=" + getSale() +
+                "weight=" + weight +
+                '}';
+    }
 }
