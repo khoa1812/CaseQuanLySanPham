@@ -142,8 +142,15 @@ public class MeatManager implements Regex {
             return;
         }
         for (Meat meat : meats) {
-            System.out.println(meat);
-            System.out.println("Giá tiền đã giảm: " + meat.getRealMoney());
+            System.out.printf("%-10s %-20s %-15s %-15s %-15s %-15s %-15s %-15s\n",
+                    "Mã ID: " + meat.getId(),
+                    "| Tên sản phẩm: " + meat.getName(),
+                    "| Giá: " + String.format("%.2f", meat.getPrice()),
+                    "| Số lượng: " + meat.getQuantity(),
+                    "| Ngày nhập: " + meat.getDate(),
+                    "| Trọng lượng " + String.format("%.2f", meat.getWeight()),
+                    "| Giảm giá: " + meat.getSale(),
+                    "| Giá khi giảm: " + String.format("%.2f", meat.getRealMoney()));
         }
     }
 

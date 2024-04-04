@@ -146,8 +146,15 @@ public class CookieManager implements Regex {
             return;
         }
         for (Cookie cookie : cookies) {
-            System.out.println(cookie);
-            System.out.println("Giá tiền đã giảm: " + cookie.getRealMoney());
+            System.out.printf("%-10s %-25s %-15s %-15s %-15s %-15s %-20s %-15s\n",
+                    "Mã ID: " + cookie.getId(),
+                    "| Tên sản phẩm: " + cookie.getName(),
+                    "| Giá: " + String.format("%.2f", cookie.getPrice()),
+                    "| Số lượng: " + cookie.getQuantity(),
+                    "| Ngày nhập: " + cookie.getDate(),
+                    "| Giảm giá: " + cookie.getSale().getPercent()*100 + "%",
+                    "| Size: " + cookie.getSize(),
+                    "| Giá khi giảm: " + String.format("%.2f", cookie.getRealMoney()));
         }
     }
 

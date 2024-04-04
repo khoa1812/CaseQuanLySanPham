@@ -66,7 +66,7 @@ public class MenuCookie {
                 case 8:
                     CookieManager.sortCookiesByMoney();
                 case 0:
-                    System.out.println("Thoát chương trình.");
+                    System.out.println("Quay lại Menu chính.");
                     break;
                 default:
                     System.err.println("Lựa chọn không hợp lệ! Vui lòng nhập lại.");
@@ -74,6 +74,5 @@ public class MenuCookie {
             }
         } while (choice != 0);
 
-        scanner.close();
     }
 }

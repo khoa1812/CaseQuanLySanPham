@@ -74,6 +74,5 @@ public class MenuMeat {
             }
         } while (choice != 0);
 
-        scanner.close();
     }
 }
