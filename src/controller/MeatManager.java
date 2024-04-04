@@ -107,8 +107,20 @@ public class MeatManager implements Regex {
             quantityStr = scanner.nextLine();
         }
         int quantity = Integer.parseInt(quantityStr);
-        System.out.print("Nhập trọng lượng: ");
-        double weight = scanner.nextDouble();
+        double weight = -1;
+        do {
+            System.out.print("Nhập khối lượng mới (phải là một số và lớn hơn 0): ");
+            if (scanner.hasNextDouble()) {
+                weight = scanner.nextDouble();
+                if (weight <= 0) {
+                    System.out.println("Giá trị phải lớn hơn 0. Vui lòng nhập lại.");
+                    weight = -1;
+                }
+            } else {
+                System.out.println("Giá trị không hợp lệ. Vui lòng nhập một số.");
+                scanner.next();
+            }
+        } while (weight <= 0);
         System.out.print("Chọn mức giảm giá (1 - SALE10, 2 - SALE15, 3 - SALE20): ");
         int saleOption = scanner.nextInt();
         scanner.nextLine();
