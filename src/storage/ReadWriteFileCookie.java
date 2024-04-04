@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadWriteFileCookie implements IReadWriteFileCookie {
-    public static final String PATHNAME = "/src/file/cookie.txt";
+    public static final String PATHNAMECOOKIE = "cookiefile.txt";
 
     public List<Cookie> readFile() {
-        File file = new File(PATHNAME);
-        if (!file.exists()) {
+        File fileCookie = new File(PATHNAMECOOKIE);
+        if (!fileCookie.exists()) {
             return getDefaultCookies();
         }
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            return (List<Cookie>) ois.readObject();
+        try (ObjectInputStream oisCookie = new ObjectInputStream(new FileInputStream(fileCookie))) {
+            return (List<Cookie>) oisCookie.readObject();
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Lỗi khi đọc file: " + e.getMessage());
             return getDefaultCookies();
@@ -26,7 +26,7 @@ public class ReadWriteFileCookie implements IReadWriteFileCookie {
     }
 
     public void writeFile(List<Cookie> cookies) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATHNAME))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATHNAMECOOKIE))) {
             oos.writeObject(cookies);
         } catch (IOException e) {
             System.err.println("Lỗi khi ghi vào file: " + e.getMessage());

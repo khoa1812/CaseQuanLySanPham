@@ -1,6 +1,7 @@
 package view;
 
 import controller.CookieManager;
+import controller.MeatManager;
 
 import java.util.Scanner;
 
@@ -24,6 +25,8 @@ public class MenuCookie {
             System.out.println("6.  |Sắp xếp sản phẩm theo giá từ thấp đến cao|");
             System.out.println("\t|-----------------------------------------|");
             System.out.println("7.  |     Sắp xếp sản phẩm theo ngày nhập     |");
+            System.out.println("\t|-----------------------------------------|");
+            System.out.println("8.  |   Sắp xếp sản phẩm theo giá tiền Sale   |");
             System.out.println("\t|-----------------------------------------|");
             System.out.println("0.  |                 Thoát                   |");
             System.out.println("\t-------------------------------------------");
@@ -60,7 +63,8 @@ public class MenuCookie {
                 case 7:
                     CookieManager.sortCookiesByExpirationDate();
                     break;
-
+                case 8:
+                    CookieManager.sortCookiesByMoney();
                 case 0:
                     System.out.println("Thoát chương trình.");
                     break;

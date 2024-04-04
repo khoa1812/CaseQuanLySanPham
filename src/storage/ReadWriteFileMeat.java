@@ -1,27 +1,24 @@
 package storage;
 
-import format.CookieSize;
-import format.Sales;
-import product.Cookie;
-import product.Food;
-import product.Meat;
 
+import format.Sales;
+import product.Meat;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReadWriteFileMeat implements IReadWriteFileMeat {
-    public static final String PATHNAME = "/src/file/meat.txt";
+    public static final String PATHNAMEMEAT = "meatfile.txt";
 
     public List<Meat> readFile() {
-        File file = new File(PATHNAME);
-        if (!file.exists()) {
+        File fileMeat = new File(PATHNAMEMEAT);
+        if (!fileMeat.exists()) {
             return getDefaultMeats();
         }
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            return (List<Meat>) ois.readObject();
+        try (ObjectInputStream oisMeat = new ObjectInputStream(new FileInputStream(fileMeat))) {
+            return (List<Meat>) oisMeat.readObject();
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Lỗi khi đọc file: " + e.getMessage());
             return getDefaultMeats();
@@ -29,8 +26,8 @@ public class ReadWriteFileMeat implements IReadWriteFileMeat {
     }
 
     public void writeFile(List<Meat> meats) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATHNAME))) {
-            oos.writeObject(meats);
+        try (ObjectOutputStream oosMeat = new ObjectOutputStream(new FileOutputStream(PATHNAMEMEAT))) {
+            oosMeat.writeObject(meats);
         } catch (IOException e) {
             System.err.println("Lỗi khi ghi vào file: " + e.getMessage());
         }

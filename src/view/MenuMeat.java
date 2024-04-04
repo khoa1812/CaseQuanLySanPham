@@ -26,6 +26,8 @@ public class MenuMeat {
             System.out.println("\t|-----------------------------------------|");
             System.out.println("7.  |     Sắp xếp sản phẩm theo ngày nhập     |");
             System.out.println("\t|-----------------------------------------|");
+            System.out.println("8.  |   Sắp xếp sản phẩm theo giá tiền Sale   |");
+            System.out.println("\t|-----------------------------------------|");
             System.out.println("0.  |                 Thoát                   |");
             System.out.println("\t-------------------------------------------");
             System.out.print("\n\nNhập lựa chọn của bạn: ");
@@ -61,7 +63,8 @@ public class MenuMeat {
                 case 7:
                     MeatManager.sortMeatsByExpirationDate();
                     break;
-
+                case 8:
+                    MeatManager.sortMeatsByMoney();
                 case 0:
                     System.out.println("Thoát chương trình.");
                     break;

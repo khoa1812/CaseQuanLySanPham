@@ -29,9 +29,20 @@ public class CookieManager implements Regex {
         String name = scanner.nextLine();
         cookieToEdit.setName(name);
 
-        System.out.print("Nhập giá mới: ");
-        double price = scanner.nextDouble();
-        cookieToEdit.setPrice(price);
+        double price = -1;
+        do {
+            System.out.print("Nhập giá mới (phải là một số và lớn hơn 0): ");
+            if (scanner.hasNextDouble()) {
+                price = scanner.nextDouble();
+                if (price <= 0) {
+                    System.out.println("Giá trị phải lớn hơn 0. Vui lòng nhập lại.");
+                    price = -1;
+                }
+            } else {
+                System.out.println("Giá trị không hợp lệ. Vui lòng nhập một số.");
+                scanner.next();
+            }
+        } while (price <= 0);
 
         System.out.print("Nhập số lượng mới: ");
         String quantityStr = scanner.next();
@@ -76,8 +87,21 @@ public class CookieManager implements Regex {
         System.out.print("Nhập tên: ");
         String name = scanner.nextLine();
         System.out.print("Nhập giá: ");
-        double price = scanner.nextDouble();
-        System.out.print("Nhập số lượng: ");
+
+        double price = -1;
+        do {
+            System.out.print("Nhập giá mới (phải là một số và lớn hơn 0): ");
+            if (scanner.hasNextDouble()) {
+                price = scanner.nextDouble();
+                if (price <= 0) {
+                    System.out.println("Giá trị phải lớn hơn 0. Vui lòng nhập lại.");
+                    price = -1;
+                }
+            } else {
+                System.out.println("Giá trị không hợp lệ. Vui lòng nhập một số.");
+                scanner.next();
+            }
+        } while (price <= 0);
         String quantityStr = scanner.nextLine();
         while (!QUANTITY_PATTERN.matcher(quantityStr).matches()) {
             System.err.println("Số lượng từ 1 đến 20.");
@@ -105,7 +129,7 @@ public class CookieManager implements Regex {
                 sale = Sales.SALE20;
                 break;
             default:
-                System.err.println("Lựa chọn không hợp lệ. Sử dụng mức giảm giá mặc định SALE10.");
+                System.out.println("Lựa chọn không hợp lệ. Sử dụng mức giảm giá mặc định SALE10.");
                 break;
         }
 
@@ -123,6 +147,7 @@ public class CookieManager implements Regex {
         }
         for (Cookie cookie : cookies) {
             System.out.println(cookie);
+            System.out.println("Giá tiền đã giảm: " + cookie.getRealMoney());
         }
     }
 
@@ -163,6 +188,10 @@ public class CookieManager implements Regex {
         displayCookies();
     }
 
+    public static void sortCookiesByMoney() {
+        cookies.sort(Comparator.comparingDouble(Cookie::getRealMoney));
+        displayCookies();
+    }
 
 
 }

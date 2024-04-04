@@ -28,9 +28,20 @@ public class MeatManager implements Regex {
         String name = scanner.nextLine();
         meatToEdit.setName(name);
 
-        System.out.print("Nhập giá mới: ");
-        double price = scanner.nextDouble();
-        meatToEdit.setPrice(price);
+        double price = -1;
+        do {
+            System.out.print("Nhập giá mới (phải là một số và lớn hơn 0): ");
+            if (scanner.hasNextDouble()) {
+                price = scanner.nextDouble();
+                if (price <= 0) {
+                    System.out.println("Giá trị phải lớn hơn 0. Vui lòng nhập lại.");
+                    price = -1;
+                }
+            } else {
+                System.out.println("Giá trị không hợp lệ. Vui lòng nhập một số.");
+                scanner.next();
+            }
+        } while (price <= 0);
 
         System.out.print("Nhập số lượng mới: ");
         String quantityStr = scanner.next();
@@ -74,8 +85,20 @@ public class MeatManager implements Regex {
         String id = scanner.nextLine();
         System.out.print("Nhập tên: ");
         String name = scanner.nextLine();
-        System.out.print("Nhập giá: ");
-        double price = scanner.nextDouble();
+        double price = -1;
+        do {
+            System.out.print("Nhập giá mới (phải là một số và lớn hơn 0): ");
+            if (scanner.hasNextDouble()) {
+                price = scanner.nextDouble();
+                if (price <= 0) {
+                    System.out.println("Giá trị phải lớn hơn 0. Vui lòng nhập lại.");
+                    price = -1;
+                }
+            } else {
+                System.out.println("Giá trị không hợp lệ. Vui lòng nhập một số.");
+                scanner.next();
+            }
+        } while (price <= 0);
         System.out.print("Nhập số lượng: ");
         String quantityStr = scanner.nextLine();
         while (!QUANTITY_PATTERN.matcher(quantityStr).matches()) {
@@ -119,18 +142,19 @@ public class MeatManager implements Regex {
             return;
         }
         for (Meat meat : meats) {
-            System.out.println(meats);
+            System.out.println(meat);
+            System.out.println("Giá tiền đã giảm: " + meat.getRealMoney());
         }
     }
 
-    public static void findMeat(String cookieId) {
+    public static void findMeat(String meatId) {
         for (Meat meat : meats) {
-            if (meat.getId().equals(cookieId)) {
+            if (meat.getId().equals(meatId)) {
                 System.out.println("Sản phẩm được tìm thấy: " + meat);
                 return;
             }
         }
-        System.out.println("Không tìm thấy sản phẩm với mã: " + cookieId);
+        System.out.println("Không tìm thấy sản phẩm với mã: " + meatId);
     }
 
     public static void removeMeat(String meatId) {
@@ -160,7 +184,9 @@ public class MeatManager implements Regex {
         displayMeats();
     }
 
-
+    public static void sortMeatsByMoney() {
+        meats.sort(Comparator.comparing(Meat::getRealMoney));
+        displayMeats();
+    }
 
 }
-
