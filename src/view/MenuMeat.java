@@ -48,11 +48,13 @@ public class MenuMeat {
                     MeatManager.findMeat(meatId);
                     break;
                 case 4:
+                    MeatManager.displayMeats();
                     System.out.println("Nhập mã sản phẩm cần xóa: ");
                     String meatId1 = scanner.nextLine();
                     MeatManager.removeMeat(meatId1);
                     break;
                 case 5:
+                    MeatManager.displayMeats();
                     System.out.print("Nhập mã sản phẩm cần sửa: ");
                     String meatIdToEdit = scanner.nextLine();
                     MeatManager.editMeat(meatIdToEdit, scanner);
@@ -66,7 +68,7 @@ public class MenuMeat {
                 case 8:
                     MeatManager.sortMeatsByMoney();
                 case 0:
-                    System.out.println("Thoát chương trình.");
+                    System.out.println("Quay lại Menu chính.");
                     break;
                 default:
                     System.err.println("Lựa chọn không hợp lệ! Vui lòng nhập lại.");

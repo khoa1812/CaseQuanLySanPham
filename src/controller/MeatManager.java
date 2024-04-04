@@ -16,6 +16,24 @@ public class MeatManager implements Regex {
     private static IReadWriteFileMeat readWriteFileMeat = new ReadWriteFileMeat();
     private static List<Meat> meats = readWriteFileMeat.readFile();
 
+    public static void displayMeats() {
+        if (meats.isEmpty()) {
+            System.out.println("Không có sản phẩm nào.");
+            return;
+        }
+        for (Meat meat : meats) {
+            System.out.printf("%-10s %-20s %-15s %-15s %-15s %-15s %-15s %-15s\n",
+                    "Mã ID: " + meat.getId(),
+                    "| Tên sản phẩm: " + meat.getName(),
+                    "| Giá: " + String.format("%.2f", meat.getPrice()),
+                    "| Số lượng: " + meat.getQuantity(),
+                    "| Ngày nhập: " + meat.getDate(),
+                    "| Trọng lượng " + String.format("%.2f", meat.getWeight()),
+                    "| Giảm giá: " + meat.getSale(),
+                    "| Giá khi giảm: " + String.format("%.2f", meat.getRealMoney()));
+        }
+    }
+
     public static void editMeat(String meatId, Scanner scanner) {
         Meat meatToEdit = meats.stream().filter(meat -> meat.getId().equals(meatId)).findFirst().orElse(null);
 
@@ -147,29 +165,19 @@ public class MeatManager implements Regex {
         System.out.println("Sản phẩm thịt đã được thêm thành công.");
     }
 
-
-    public static void displayMeats() {
-        if (meats.isEmpty()) {
-            System.out.println("Không có sản phẩm nào.");
-            return;
-        }
-        for (Meat meat : meats) {
-            System.out.printf("%-10s %-20s %-15s %-15s %-15s %-15s %-15s %-15s\n",
-                    "Mã ID: " + meat.getId(),
-                    "| Tên sản phẩm: " + meat.getName(),
-                    "| Giá: " + String.format("%.2f", meat.getPrice()),
-                    "| Số lượng: " + meat.getQuantity(),
-                    "| Ngày nhập: " + meat.getDate(),
-                    "| Trọng lượng " + String.format("%.2f", meat.getWeight()),
-                    "| Giảm giá: " + meat.getSale(),
-                    "| Giá khi giảm: " + String.format("%.2f", meat.getRealMoney()));
-        }
-    }
-
     public static void findMeat(String meatId) {
         for (Meat meat : meats) {
             if (meat.getId().equals(meatId)) {
-                System.out.println("Sản phẩm được tìm thấy: " + meat);
+                System.out.println("Sản phẩm được tìm thấy: ");
+                System.out.printf("%-10s %-20s %-15s %-15s %-15s %-15s %-15s %-15s\n",
+                        "Mã ID: " + meat.getId(),
+                        "| Tên sản phẩm: " + meat.getName(),
+                        "| Giá: " + String.format("%.2f", meat.getPrice()),
+                        "| Số lượng: " + meat.getQuantity(),
+                        "| Ngày nhập: " + meat.getDate(),
+                        "| Trọng lượng " + String.format("%.2f", meat.getWeight()),
+                        "| Giảm giá: " + meat.getSale(),
+                        "| Giá khi giảm: " + String.format("%.2f", meat.getRealMoney()));
                 return;
             }
         }

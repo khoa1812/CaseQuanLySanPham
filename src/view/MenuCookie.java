@@ -48,11 +48,13 @@ public class MenuCookie {
                     CookieManager.findCookie(cookieId);
                     break;
                 case 4:
+                    CookieManager.displayCookies();
                     System.out.println("Nhập mã sản phẩm cần xóa: ");
                     String cookieId1 = scanner.nextLine();
                     CookieManager.removeCookie(cookieId1);
                     break;
                 case 5:
+                    CookieManager.displayCookies();
                     System.out.print("Nhập mã sản phẩm cần sửa: ");
                     String cookieIdToEdit = scanner.nextLine();
                     CookieManager.editCookie(cookieIdToEdit, scanner);

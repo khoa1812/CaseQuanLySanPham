@@ -17,6 +17,24 @@ public class CookieManager implements Regex {
     private static IReadWriteFileCookie readWriteFileCookie = new ReadWriteFileCookie();
     private static List<Cookie> cookies = readWriteFileCookie.readFile();
 
+    public static void displayCookies() {
+        if (cookies.isEmpty()) {
+            System.out.println("Không có sản phẩm nào.");
+            return;
+        }
+        for (Cookie cookie : cookies) {
+            System.out.printf("%-10s %-25s %-15s %-15s %-15s %-15s %-20s %-15s\n",
+                    "Mã ID: " + cookie.getId(),
+                    "| Tên sản phẩm: " + cookie.getName(),
+                    "| Giá: " + String.format("%.2f", cookie.getPrice()),
+                    "| Số lượng: " + cookie.getQuantity(),
+                    "| Ngày nhập: " + cookie.getDate(),
+                    "| Giảm giá: " + cookie.getSale().getPercent()*100 + "%",
+                    "| Size: " + cookie.getSize(),
+                    "| Giá khi giảm: " + String.format("%.2f", cookie.getRealMoney()));
+        }
+    }
+
     public static void editCookie(String cookieId, Scanner scanner) {
         Cookie cookieToEdit = cookies.stream().filter(cookie -> cookie.getId().equals(cookieId)).findFirst().orElse(null);
 
@@ -139,29 +157,19 @@ public class CookieManager implements Regex {
         System.out.println("Sản phẩm cookie đã được thêm thành công.");
     }
 
-
-    public static void displayCookies() {
-        if (cookies.isEmpty()) {
-            System.out.println("Không có sản phẩm nào.");
-            return;
-        }
-        for (Cookie cookie : cookies) {
-            System.out.printf("%-10s %-25s %-15s %-15s %-15s %-15s %-20s %-15s\n",
-                    "Mã ID: " + cookie.getId(),
-                    "| Tên sản phẩm: " + cookie.getName(),
-                    "| Giá: " + String.format("%.2f", cookie.getPrice()),
-                    "| Số lượng: " + cookie.getQuantity(),
-                    "| Ngày nhập: " + cookie.getDate(),
-                    "| Giảm giá: " + cookie.getSale().getPercent()*100 + "%",
-                    "| Size: " + cookie.getSize(),
-                    "| Giá khi giảm: " + String.format("%.2f", cookie.getRealMoney()));
-        }
-    }
-
     public static void findCookie(String cookieId) {
         for (Cookie cookie : cookies) {
             if (cookie.getId().equals(cookieId)) {
-                System.out.println("Sản phẩm được tìm thấy: " + cookie);
+                System.out.println("Sản phẩm được tìm thấy: ");
+                System.out.printf("%-10s %-25s %-15s %-15s %-15s %-15s %-20s %-15s\n",
+                        "Mã ID: " + cookie.getId(),
+                        "| Tên sản phẩm: " + cookie.getName(),
+                        "| Giá: " + String.format("%.2f", cookie.getPrice()),
+                        "| Số lượng: " + cookie.getQuantity(),
+                        "| Ngày nhập: " + cookie.getDate(),
+                        "| Giảm giá: " + cookie.getSale().getPercent()*100 + "%",
+                        "| Size: " + cookie.getSize(),
+                        "| Giá khi giảm: " + String.format("%.2f", cookie.getRealMoney()));
                 return;
             }
         }
