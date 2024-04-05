@@ -1,7 +1,6 @@
 package view;
 
 import controller.CookieManager;
-import controller.MeatManager;
 
 import java.util.Scanner;
 

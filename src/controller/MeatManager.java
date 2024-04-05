@@ -2,7 +2,6 @@ package controller;
 
 import format.Regex;
 import format.Sales;
-import product.Cookie;
 import product.Meat;
 import storage.*;
 import storage.ReadWriteFileMeat;
