@@ -53,11 +53,11 @@ public class MeatManager implements Regex {
             if (scanner.hasNextDouble()) {
                 price = scanner.nextDouble();
                 if (price <= 0) {
-                    System.out.println("Giá trị phải lớn hơn 0. Vui lòng nhập lại.");
+                    System.err.println("Giá trị phải lớn hơn 0. Vui lòng nhập lại.");
                     price = -1;
                 }
             } else {
-                System.out.println("Giá trị không hợp lệ. Vui lòng nhập một số.");
+                System.err.println("Giá trị không hợp lệ. Vui lòng nhập một số.");
                 scanner.next();
             }
         } while (price <= 0);
@@ -89,7 +89,7 @@ public class MeatManager implements Regex {
                 sale = Sales.SALE20;
                 break;
             default:
-                System.out.println("Lựa chọn không hợp lệ. Sử dụng mức giảm giá mặc định SALE10.");
+                System.err.println("Lựa chọn không hợp lệ. Sử dụng mức giảm giá mặc định SALE10.");
                 break;
         }
         meatToEdit.setSale(sale);
@@ -124,11 +124,11 @@ public class MeatManager implements Regex {
             if (scanner.hasNextDouble()) {
                 price = scanner.nextDouble();
                 if (price <= 0) {
-                    System.out.println("Giá trị phải lớn hơn 0. Vui lòng nhập lại.");
+                    System.err.println("Giá trị phải lớn hơn 0. Vui lòng nhập lại.");
                     price = -1;
                 }
             } else {
-                System.out.println("Giá trị không hợp lệ. Vui lòng nhập một số.");
+                System.err.println("Giá trị không hợp lệ. Vui lòng nhập một số.");
                 scanner.next();
             }
         } while (price <= 0);
@@ -146,11 +146,11 @@ public class MeatManager implements Regex {
             if (scanner.hasNextDouble()) {
                 weight = scanner.nextDouble();
                 if (weight <= 0) {
-                    System.out.println("Giá trị phải lớn hơn 0. Vui lòng nhập lại.");
+                    System.err.println("Giá trị phải lớn hơn 0. Vui lòng nhập lại.");
                     weight = -1;
                 }
             } else {
-                System.out.println("Giá trị không hợp lệ. Vui lòng nhập một số.");
+                System.err.println("Giá trị không hợp lệ. Vui lòng nhập một số.");
                 scanner.next();
             }
         } while (weight <= 0);
@@ -170,7 +170,7 @@ public class MeatManager implements Regex {
                 sale = Sales.SALE20;
                 break;
             default:
-                System.out.println("Lựa chọn không hợp lệ. Sử dụng mức giảm giá mặc định SALE10.");
+                System.err.println("Lựa chọn không hợp lệ. Sử dụng mức giảm giá mặc định SALE10.");
                 break;
         }
 

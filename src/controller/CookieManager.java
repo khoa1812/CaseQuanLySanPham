@@ -53,11 +53,11 @@ public class CookieManager implements Regex {
             if (scanner.hasNextDouble()) {
                 price = scanner.nextDouble();
                 if (price <= 0) {
-                    System.out.println("Giá trị phải lớn hơn 0. Vui lòng nhập lại.");
+                    System.err.println("Giá trị phải lớn hơn 0. Vui lòng nhập lại.");
                     price = -1;
                 }
             } else {
-                System.out.println("Giá trị không hợp lệ. Vui lòng nhập một số.");
+                System.err.println("Giá trị không hợp lệ. Vui lòng nhập một số.");
                 scanner.next();
             }
         } while (price <= 0);
@@ -65,7 +65,7 @@ public class CookieManager implements Regex {
         System.out.print("Nhập số lượng mới: ");
         String quantityStr = scanner.next();
         while (!QUANTITY_PATTERN.matcher(quantityStr).matches()) {
-            System.err.println("Số lượng từ 1 đến 20.");
+            System.out.println("Số lượng từ 1 đến 20.");
             System.out.print("Nhập số lượng mới: ");
             quantityStr = scanner.next();
         }
@@ -109,7 +109,7 @@ public class CookieManager implements Regex {
             idExists = false;
             for (Cookie cookie : cookies) {
                 if (cookie.getId().equals(id)) {
-                    System.out.println("ID đã tồn tại. Vui lòng nhập ID khác.");
+                    System.err.println("ID đã tồn tại. Vui lòng nhập ID khác.");
                     idExists = true;
                     break;
                 }
@@ -126,17 +126,17 @@ public class CookieManager implements Regex {
             if (scanner.hasNextDouble()) {
                 price = scanner.nextDouble();
                 if (price <= 0) {
-                    System.out.println("Giá trị phải lớn hơn 0. Vui lòng nhập lại.");
+                    System.err.println("Giá trị phải lớn hơn 0. Vui lòng nhập lại.");
                     price = -1;
                 }
             } else {
-                System.out.println("Giá trị không hợp lệ. Vui lòng nhập một số.");
+                System.err.println("Giá trị không hợp lệ. Vui lòng nhập một số.");
                 scanner.next();
             }
         } while (price <= 0);
         String quantityStr = scanner.nextLine();
         while (!QUANTITY_PATTERN.matcher(quantityStr).matches()) {
-            System.err.println("Số lượng từ 1 đến 20.");
+            System.out.println("Số lượng từ 1 đến 20.");
             System.out.print("Nhập số lượng: ");
             quantityStr = scanner.nextLine();
         }
@@ -161,7 +161,7 @@ public class CookieManager implements Regex {
                 sale = Sales.SALE20;
                 break;
             default:
-                System.out.println("Lựa chọn không hợp lệ. Sử dụng mức giảm giá mặc định SALE10.");
+                System.err.println("Lựa chọn không hợp lệ. Sử dụng mức giảm giá mặc định SALE10.");
                 break;
         }
 
