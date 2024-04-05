@@ -100,8 +100,22 @@ public class CookieManager implements Regex {
 
 
     public static void addNewCookie(Scanner scanner) {
-        System.out.print("Nhập id: ");
-        String id = scanner.nextLine();
+        String id;
+        boolean idExists;
+
+        do {
+            System.out.print("Nhập id: ");
+            id = scanner.nextLine();
+            idExists = false;
+            for (Cookie cookie : cookies) {
+                if (cookie.getId().equals(id)) {
+                    System.out.println("ID đã tồn tại. Vui lòng nhập ID khác.");
+                    idExists = true;
+                    break;
+                }
+            }
+        } while (idExists);
+
         System.out.print("Nhập tên: ");
         String name = scanner.nextLine();
         System.out.print("Nhập giá: ");

@@ -2,6 +2,7 @@ package controller;
 
 import format.Regex;
 import format.Sales;
+import product.Cookie;
 import product.Meat;
 import storage.*;
 import storage.ReadWriteFileMeat;
@@ -99,8 +100,22 @@ public class MeatManager implements Regex {
 
 
     public static void addNewMeat(Scanner scanner) {
-        System.out.print("Nhập id: ");
-        String id = scanner.nextLine();
+        String id;
+        boolean idExists;
+
+        do {
+            System.out.print("Nhập id: ");
+            id = scanner.nextLine();
+            idExists = false;
+            for (Meat meat : meats) {
+                if (meat.getId().equals(id)) {
+                    System.out.println("ID đã tồn tại. Vui lòng nhập ID khác.");
+                    idExists = true;
+                    break;
+                }
+            }
+        } while (idExists);
+
         System.out.print("Nhập tên: ");
         String name = scanner.nextLine();
         double price = -1;

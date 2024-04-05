@@ -36,9 +36,9 @@ public class ReadWriteFileMeat implements IReadWriteFileMeat {
     private List<Meat> getDefaultMeats() {
         List<Meat> defaultMeats = new ArrayList<>();
 
-        defaultMeats.add(new Meat("01", "bò", 200, 10, LocalDate.now(),10, Sales.SALE10));
-        defaultMeats.add(new Meat("02", "lợn", 160, 10, LocalDate.now(),10, Sales.SALE15));
-        defaultMeats.add(new Meat("03", "gà", 150, 10, LocalDate.now(),10, Sales.SALE20));
+        defaultMeats.add(new Meat("1", "bò", 200, 10, LocalDate.now(),10, Sales.SALE10));
+        defaultMeats.add(new Meat("2", "lợn", 160, 10, LocalDate.now(),10, Sales.SALE15));
+        defaultMeats.add(new Meat("3", "gà", 150, 10, LocalDate.now(),10, Sales.SALE20));
 
         writeFile(defaultMeats);
         return defaultMeats;
