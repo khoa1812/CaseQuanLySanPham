@@ -36,9 +36,9 @@ public class ReadWriteFileCookie implements IReadWriteFileCookie {
     private List<Cookie> getDefaultCookies() {
         List<Cookie> defaultCookies = new ArrayList<>();
 
-        defaultCookies.add(new Cookie("04", "bánh mỳ", 30, 15, LocalDate.now(), Sales.SALE10, CookieSize.SMALLSIZE));
-        defaultCookies.add(new Cookie("05", "gato", 50, 20, LocalDate.now(), Sales.SALE10, CookieSize.BIGSIZE));
-        defaultCookies.add(new Cookie("06", "su kem", 25, 15, LocalDate.now(), Sales.SALE10, CookieSize.SMALLSIZE));
+        defaultCookies.add(new Cookie("01", "bánh mỳ", 30, 15, LocalDate.now(), Sales.SALE10, CookieSize.SMALLSIZE));
+        defaultCookies.add(new Cookie("02", "gato", 50, 20, LocalDate.now(), Sales.SALE10, CookieSize.BIGSIZE));
+        defaultCookies.add(new Cookie("03", "su kem", 25, 15, LocalDate.now(), Sales.SALE10, CookieSize.SMALLSIZE));
 
         writeFile(defaultCookies);
         return defaultCookies;
